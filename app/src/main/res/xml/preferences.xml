@@ -2,6 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:seekbar="http://schemas.moonlight-stream.com/apk/res/seekbar">
 
+    <PreferenceCategory android:title="@string/fold_settings">
+        <CheckBoxPreference android:key="checkbox_force_landscape" android:defaultValue="false"
+            android:title="@string/force_landscape" android:summary="@string/force_landscape_summary" />
+        <CheckBoxPreference android:key="checkbox_docked_controller" android:defaultValue="false"
+            android:title="@string/docked_controller" android:summary="@string/docked_controller_summary"
+            android:dependency="checkbox_show_onscreen_controls" />
+        <CheckBoxPreference android:key="checkbox_builtin_keyboard" android:defaultValue="false"
+            android:title="@string/builtin_keyboard" android:summary="@string/builtin_keyboard_summary" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/category_basic_settings"
         android:key="category_basic_settings">
         <ListPreference

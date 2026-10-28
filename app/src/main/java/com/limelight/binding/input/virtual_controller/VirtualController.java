@@ -102,7 +102,28 @@ public class VirtualController {
         return handler;
     }
 
+    public void releaseAll() {
+        inputContext = new ControllerInputContext();
+        sendControllerInputContext();
+    }
+
+    public DisplayMetrics getLayoutMetrics() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        metrics.setTo(context.getResources().getDisplayMetrics());
+        if (frame_layout.getId() == R.id.controllerDock) {
+            metrics.widthPixels = Math.max(1, frame_layout.getWidth());
+            metrics.heightPixels = Math.max(1, frame_layout.getHeight());
+        }
+        return metrics;
+    }
+
+    public String getProfileName() {
+        return VirtualControllerConfigurationLoader.OSC_PREFERENCE +
+                (frame_layout.getId() == R.id.controllerDock ? "_Docked" : "");
+    }
+
     public void hide() {
+        releaseAll();
         for (VirtualControllerElement element : elements) {
             element.setVisibility(View.INVISIBLE);
         }
@@ -139,6 +160,12 @@ public class VirtualController {
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
         layoutParams.setMargins(x, y, 0, 0);
 
+        if (frame_layout.getId() == R.id.controllerDock) {
+            layoutParams.width = Math.min(width, Math.max(1, frame_layout.getWidth()));
+            layoutParams.height = Math.min(height, Math.max(1, frame_layout.getHeight()));
+            layoutParams.leftMargin = Math.max(0, Math.min(x, frame_layout.getWidth() - layoutParams.width));
+            layoutParams.topMargin = Math.max(0, Math.min(y, frame_layout.getHeight() - layoutParams.height));
+        }
         frame_layout.addView(element, layoutParams);
     }
 
@@ -153,9 +180,10 @@ public class VirtualController {
     }
 
     public void refreshLayout() {
+        releaseAll();
         removeElements();
 
-        DisplayMetrics screen = context.getResources().getDisplayMetrics();
+        DisplayMetrics screen = getLayoutMetrics();
 
         int buttonSize = (int)(screen.heightPixels*0.06f);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(buttonSize, buttonSize);

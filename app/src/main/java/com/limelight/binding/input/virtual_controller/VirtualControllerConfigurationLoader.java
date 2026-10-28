@@ -191,7 +191,7 @@ public class VirtualControllerConfigurationLoader {
 
     public static void createDefaultLayout(final VirtualController controller, final Context context) {
 
-        DisplayMetrics screen = context.getResources().getDisplayMetrics();
+        DisplayMetrics screen = controller.getLayoutMetrics();
         PreferenceConfiguration config = PreferenceConfiguration.readPreferences(context);
 
         // Displace controls on the right by this amount of pixels to account for different aspect ratios
@@ -352,7 +352,7 @@ public class VirtualControllerConfigurationLoader {
 
     public static void saveProfile(final VirtualController controller,
                                    final Context context) {
-        SharedPreferences.Editor prefEditor = context.getSharedPreferences(OSC_PREFERENCE, Activity.MODE_PRIVATE).edit();
+        SharedPreferences.Editor prefEditor = context.getSharedPreferences(controller.getProfileName(), Activity.MODE_PRIVATE).edit();
 
         for (VirtualControllerElement element : controller.getElements()) {
             String prefKey = ""+element.elementId;
@@ -367,7 +367,7 @@ public class VirtualControllerConfigurationLoader {
     }
 
     public static void loadFromPreferences(final VirtualController controller, final Context context) {
-        SharedPreferences pref = context.getSharedPreferences(OSC_PREFERENCE, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(controller.getProfileName(), Activity.MODE_PRIVATE);
 
         for (VirtualControllerElement element : controller.getElements()) {
             String prefKey = ""+element.elementId;

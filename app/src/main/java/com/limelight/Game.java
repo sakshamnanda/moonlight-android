@@ -31,6 +31,8 @@ import com.limelight.preferences.GlPreferences;
 import com.limelight.preferences.PreferenceConfiguration;
 import com.limelight.ui.GameGestures;
 import com.limelight.ui.StreamView;
+import com.limelight.ui.DockedStreamLayout;
+import com.limelight.ui.GamingKeyboard;
 import com.limelight.utils.Dialog;
 import com.limelight.utils.ServerHelper;
 import com.limelight.utils.ShortcutHelper;
@@ -137,6 +139,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     private boolean waitingForAllModifiersUp = false;
     private int specialKeyCode = KeyEvent.KEYCODE_UNKNOWN;
     private StreamView streamView;
+    private DockedStreamLayout dockedLayout;
+    private GamingKeyboard gamingKeyboard;
     private long lastAbsTouchUpTime = 0;
     private long lastAbsTouchDownTime = 0;
     private float lastAbsTouchUpX, lastAbsTouchUpY;
@@ -240,6 +244,19 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         streamView.setOnGenericMotionListener(this);
         streamView.setOnKeyListener(this);
         streamView.setInputCallbacks(this);
+        dockedLayout = findViewById(R.id.streamRoot);
+        dockedLayout.configure(prefConfig.dockedController && prefConfig.onscreenController,
+                prefConfig.builtInKeyboard, (double) prefConfig.width / prefConfig.height);
+        if (prefConfig.builtInKeyboard) {
+            gamingKeyboard = new GamingKeyboard(this, (keyCode, down) -> {
+                if (conn != null && keyboardTranslator != null && connected) {
+                    keyboardEvent(down, (short) keyCode);
+                }
+            });
+            ((android.widget.LinearLayout) findViewById(R.id.inputDock)).addView(gamingKeyboard,
+                    new android.widget.LinearLayout.LayoutParams(-1, -1));
+            findViewById(R.id.dockKeyboardToggle).setOnClickListener(v -> toggleKeyboard());
+        }
 
         // Listen for touch events on the background touch view to enable trackpad mode
         // to work on areas outside of the StreamView itself. We use a separate View
@@ -507,8 +524,14 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         if (prefConfig.onscreenController) {
             // create virtual onscreen controller
             virtualController = new VirtualController(controllerHandler,
-                    (FrameLayout)streamView.getParent(),
+                    prefConfig.dockedController ? findViewById(R.id.controllerDock) : (FrameLayout)streamView.getParent(),
                     this);
+            if (prefConfig.dockedController) {
+                View dock = findViewById(R.id.controllerDock);
+                dock.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
+                    if (r - l != or - ol || b - t != ob - ot) virtualController.refreshLayout();
+                });
+            }
             virtualController.refreshLayout();
             virtualController.show();
         }
@@ -536,6 +559,10 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     }
 
     private void setPreferredOrientationForCurrentDisplay() {
+        if (prefConfig.forceLandscape) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+            return;
+        }
         Display display = getWindowManager().getDefaultDisplay();
 
         // For semi-square displays, we use more complex logic to determine which orientation to use (if any)
@@ -586,6 +613,11 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             virtualController.refreshLayout();
         }
 
+        if (dockedLayout != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (gamingKeyboard != null) gamingKeyboard.releaseAll();
+            dockedLayout.setPictureInPicture(isInPictureInPictureMode());
+        }
+
         // Hide on-screen overlays in PiP mode
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (isInPictureInPictureMode()) {
@@ -609,7 +641,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
                 // Restore overlays to previous state when leaving PiP
 
-                if (virtualController != null) {
+                if (virtualController != null &&
+                        !(gamingKeyboard != null && dockedLayout.isKeyboardVisible() && !prefConfig.dockedController)) {
                     virtualController.show();
                 }
 
@@ -950,7 +983,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             }
         }
 
-        if (prefConfig.stretchVideo || aspectRatioMatch) {
+        if ((prefConfig.stretchVideo || aspectRatioMatch) &&
+                !prefConfig.dockedController && !prefConfig.builtInKeyboard) {
             // Set the surface to the size of the video
             streamView.getHolder().setFixedSize(prefConfig.width, prefConfig.height);
         }
@@ -1062,6 +1096,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     protected void onPause() {
+        if (gamingKeyboard != null) gamingKeyboard.releaseAll();
+        if (virtualController != null) virtualController.releaseAll();
         if (isFinishing()) {
             // Stop any further input device notifications before we lose focus (and pointer capture)
             if (controllerHandler != null) {
@@ -1499,6 +1535,17 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     public void toggleKeyboard() {
+        if (gamingKeyboard != null) {
+            gamingKeyboard.releaseAll();
+            if (virtualController != null) virtualController.releaseAll();
+            dockedLayout.toggleKeyboard();
+            if (virtualController != null && !prefConfig.dockedController) {
+                if (dockedLayout.isKeyboardVisible()) virtualController.hide();
+                else virtualController.show();
+            }
+            streamView.requestFocus();
+            return;
+        }
         LimeLog.info("Toggling keyboard overlay");
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.toggleSoftInput(0, 0);

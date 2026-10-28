@@ -341,6 +341,13 @@ public abstract class VirtualControllerElement extends View {
         layoutParams.topMargin = configuration.getInt("TOP");
         layoutParams.width = configuration.getInt("WIDTH");
         layoutParams.height = configuration.getInt("HEIGHT");
+        if (getParent() instanceof View && ((View) getParent()).getId() == com.limelight.R.id.controllerDock) {
+            View parent = (View) getParent();
+            layoutParams.width = Math.max(1, Math.min(layoutParams.width, parent.getWidth()));
+            layoutParams.height = Math.max(1, Math.min(layoutParams.height, parent.getHeight()));
+            layoutParams.leftMargin = Math.max(0, Math.min(layoutParams.leftMargin, parent.getWidth() - layoutParams.width));
+            layoutParams.topMargin = Math.max(0, Math.min(layoutParams.topMargin, parent.getHeight() - layoutParams.height));
+        }
 
         requestLayout();
     }

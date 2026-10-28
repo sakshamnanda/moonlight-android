@@ -303,4 +303,13 @@
     <string name="analogscroll_none">None (both sticks move the mouse)</string>
     <string name="analogscroll_right">Right analog stick</string>
     <string name="analogscroll_left">Left analog stick</string>
+    <string name="fold_settings">Fold and docked controls</string>
+    <string name="force_landscape">Force landscape streaming</string>
+    <string name="force_landscape_summary">Keep streaming in landscape, including on the unfolded display.</string>
+    <string name="docked_controller">Controller below the stream</string>
+    <string name="docked_controller_summary">Move the video to the top and place touch controls in a separate bottom panel.</string>
+    <string name="builtin_keyboard">Built-in gaming keyboard</string>
+    <string name="builtin_keyboard_summary">Use a docked PC keyboard instead of the phone keyboard. Open it with the Keyboard button or a three-finger tap.</string>
+    <string name="dock_keyboard">Keyboard</string>
+    <string name="dock_close_keyboard">Hide keyboard</string>
 </resources>

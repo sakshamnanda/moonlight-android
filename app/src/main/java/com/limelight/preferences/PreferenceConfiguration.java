@@ -130,6 +130,7 @@ public class PreferenceConfiguration {
     public boolean stretchVideo, enableSops, playHostAudio, disableWarnings;
     public String language;
     public boolean smallIconMode, multiController, usbDriver, flipFaceButtons;
+    public boolean forceLandscape, dockedController, builtInKeyboard;
     public boolean onscreenController;
     public boolean onlyL3R3;
     public boolean showGuideButton;
@@ -569,6 +570,10 @@ public class PreferenceConfiguration {
         config.oscOpacity = prefs.getInt(OSC_OPACITY_PREF_STRING, DEFAULT_OPACITY);
 
         config.language = prefs.getString(LANGUAGE_PREF_STRING, DEFAULT_LANGUAGE);
+
+        config.forceLandscape = prefs.getBoolean("checkbox_force_landscape", false);
+        config.dockedController = prefs.getBoolean("checkbox_docked_controller", false);
+        config.builtInKeyboard = prefs.getBoolean("checkbox_builtin_keyboard", false);
 
         // Checkbox preferences
         config.disableWarnings = prefs.getBoolean(DISABLE_TOASTS_PREF_STRING, DEFAULT_DISABLE_TOASTS);
