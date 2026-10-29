@@ -139,6 +139,11 @@ public class DigitalButton extends VirtualControllerElement {
         canvas.drawColor(Color.TRANSPARENT);
 
         paint.setTextSize(getPercent(getWidth(), 25));
+        if (virtualController.isDocked()) {
+            float maxWidth = getWidth() * 0.78f;
+            float measuredWidth = paint.measureText(text);
+            if (measuredWidth > maxWidth) paint.setTextSize(paint.getTextSize() * maxWidth / measuredWidth);
+        }
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStrokeWidth(getDefaultStrokeWidth());
 
@@ -158,7 +163,9 @@ public class DigitalButton extends VirtualControllerElement {
         } else {
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
             paint.setStrokeWidth(getDefaultStrokeWidth()/2);
-            canvas.drawText(text, getPercent(getWidth(), 50), getPercent(getHeight(), 63), paint);
+            float baseline = virtualController.isDocked() ?
+                    (getHeight() - paint.ascent() - paint.descent()) / 2 : getPercent(getHeight(), 63);
+            canvas.drawText(text, getPercent(getWidth(), 50), baseline, paint);
         }
     }
 

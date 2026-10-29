@@ -189,10 +189,68 @@ public class VirtualControllerConfigurationLoader {
     private static final int GUIDE_X = START_X-BACK_X;
     private static final int GUIDE_Y = START_BACK_Y;
 
+    private static void addDockedElement(VirtualController controller, VirtualControllerElement element,
+            java.util.Map<DockedControllerLayout.Slot, DockedControllerLayout.Bounds> slots,
+            DockedControllerLayout.Slot slot) {
+        DockedControllerLayout.Bounds b = slots.get(slot);
+        controller.addElement(element, b.x, b.y, b.width, b.height);
+    }
+
+    private static void createDockedLayout(VirtualController controller, Context context,
+            DisplayMetrics screen, PreferenceConfiguration config) {
+        java.util.Map<DockedControllerLayout.Slot, DockedControllerLayout.Bounds> slots =
+                DockedControllerLayout.calculate(screen.widthPixels, screen.heightPixels, screen.density);
+        if (config.onlyL3R3) {
+            addDockedElement(controller, createDigitalButton(VirtualControllerElement.EID_LSB,
+                    ControllerPacket.LS_CLK_FLAG, 0, 1, "L3", -1, controller, context), slots,
+                    DockedControllerLayout.Slot.LEFT_STICK);
+            addDockedElement(controller, createDigitalButton(VirtualControllerElement.EID_RSB,
+                    ControllerPacket.RS_CLK_FLAG, 0, 1, "R3", -1, controller, context), slots,
+                    DockedControllerLayout.Slot.RIGHT_STICK);
+        } else {
+            addDockedElement(controller, createDigitalPad(controller, context), slots, DockedControllerLayout.Slot.DPAD);
+            addDockedElement(controller, createLeftStick(controller, context), slots, DockedControllerLayout.Slot.LEFT_STICK);
+            addDockedElement(controller, createRightStick(controller, context), slots, DockedControllerLayout.Slot.RIGHT_STICK);
+            addDockedElement(controller, createLeftTrigger(1, "LT", -1, controller, context), slots, DockedControllerLayout.Slot.LT);
+            addDockedElement(controller, createRightTrigger(1, "RT", -1, controller, context), slots, DockedControllerLayout.Slot.RT);
+            int[] ids = {VirtualControllerElement.EID_LB, VirtualControllerElement.EID_BACK,
+                    VirtualControllerElement.EID_START, VirtualControllerElement.EID_RB,
+                    VirtualControllerElement.EID_A, VirtualControllerElement.EID_B,
+                    VirtualControllerElement.EID_X, VirtualControllerElement.EID_Y};
+            int[] flags = {ControllerPacket.LB_FLAG, ControllerPacket.BACK_FLAG,
+                    ControllerPacket.PLAY_FLAG, ControllerPacket.RB_FLAG,
+                    config.flipFaceButtons ? ControllerPacket.B_FLAG : ControllerPacket.A_FLAG,
+                    config.flipFaceButtons ? ControllerPacket.A_FLAG : ControllerPacket.B_FLAG,
+                    config.flipFaceButtons ? ControllerPacket.Y_FLAG : ControllerPacket.X_FLAG,
+                    config.flipFaceButtons ? ControllerPacket.X_FLAG : ControllerPacket.Y_FLAG};
+            String[] names = {"LB", "BACK", "START", "RB", config.flipFaceButtons ? "B" : "A",
+                    config.flipFaceButtons ? "A" : "B", config.flipFaceButtons ? "Y" : "X",
+                    config.flipFaceButtons ? "X" : "Y"};
+            DockedControllerLayout.Slot[] positions = {DockedControllerLayout.Slot.LB,
+                    DockedControllerLayout.Slot.BACK, DockedControllerLayout.Slot.START,
+                    DockedControllerLayout.Slot.RB, DockedControllerLayout.Slot.A,
+                    DockedControllerLayout.Slot.B, DockedControllerLayout.Slot.X, DockedControllerLayout.Slot.Y};
+            for (int i = 0; i < ids.length; i++) {
+                addDockedElement(controller, createDigitalButton(ids[i], flags[i], 0, 1,
+                        names[i], -1, controller, context), slots, positions[i]);
+            }
+        }
+        if (config.showGuideButton) {
+            addDockedElement(controller, createDigitalButton(VirtualControllerElement.EID_GDB,
+                    ControllerPacket.SPECIAL_BUTTON_FLAG, 0, 1, "GUIDE", -1, controller, context),
+                    slots, DockedControllerLayout.Slot.GUIDE);
+        }
+        controller.setOpacity(config.oscOpacity);
+    }
+
     public static void createDefaultLayout(final VirtualController controller, final Context context) {
 
         DisplayMetrics screen = controller.getLayoutMetrics();
         PreferenceConfiguration config = PreferenceConfiguration.readPreferences(context);
+        if (controller.isDocked()) {
+            createDockedLayout(controller, context, screen, config);
+            return;
+        }
 
         // Displace controls on the right by this amount of pixels to account for different aspect ratios
         int rightDisplacement = screen.widthPixels - screen.heightPixels * 16 / 9;

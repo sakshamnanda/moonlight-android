@@ -33,6 +33,7 @@ public class ConfirmDeleteOscPreference extends DialogPreference {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             getContext().getSharedPreferences(OSC_PREFERENCE, Context.MODE_PRIVATE).edit().clear().apply();
             getContext().getSharedPreferences(OSC_PREFERENCE + "_Docked", Context.MODE_PRIVATE).edit().clear().apply();
+            getContext().getSharedPreferences(OSC_PREFERENCE + "_Docked_v2", Context.MODE_PRIVATE).edit().clear().apply();
             Toast.makeText(getContext(), R.string.toast_reset_osc_success, Toast.LENGTH_SHORT).show();
         }
     }

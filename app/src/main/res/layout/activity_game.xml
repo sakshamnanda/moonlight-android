@@ -55,7 +55,5 @@
     <LinearLayout android:id="@+id/inputDock" android:layout_width="match_parent"
         android:layout_height="match_parent" android:orientation="vertical"
         android:background="#101010" android:visibility="gone" />
-    <Button android:id="@+id/dockKeyboardToggle" android:layout_width="wrap_content"
-        android:layout_height="40dp" android:layout_gravity="bottom|center_horizontal"
-        android:focusable="false" android:text="@string/dock_keyboard" android:visibility="gone" />
+
 </com.limelight.ui.DockedStreamLayout>

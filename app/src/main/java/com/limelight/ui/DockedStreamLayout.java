@@ -3,7 +3,6 @@ package com.limelight.ui;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import com.limelight.R;
 
@@ -18,15 +17,12 @@ public class DockedStreamLayout extends FrameLayout {
         controllerEnabled = controller;
         keyboardEnabled = keyboard;
         aspectRatio = ratio;
-        findViewById(R.id.dockKeyboardToggle).setVisibility(keyboard ? VISIBLE : GONE);
         updateVisibility();
     }
 
     public void toggleKeyboard() {
         if (!keyboardEnabled) return;
         keyboardVisible = !keyboardVisible;
-        ((Button) findViewById(R.id.dockKeyboardToggle)).setText(keyboardVisible ?
-                R.string.dock_close_keyboard : R.string.dock_keyboard);
         updateVisibility();
     }
 
@@ -34,7 +30,6 @@ public class DockedStreamLayout extends FrameLayout {
 
     public void setPictureInPicture(boolean enabled) {
         pictureInPicture = enabled;
-        findViewById(R.id.dockKeyboardToggle).setVisibility(keyboardEnabled && !enabled ? VISIBLE : GONE);
         updateVisibility();
     }
 
@@ -45,9 +40,8 @@ public class DockedStreamLayout extends FrameLayout {
     }
 
     private boolean isDocked() { return !pictureInPicture && (controllerEnabled || keyboardVisible); }
-    private int toolbarHeight() { return keyboardEnabled ? Math.round(40 * getResources().getDisplayMetrics().density) : 0; }
     private int videoHeight(int width, int height) {
-        return DockedStreamGeometry.videoHeight(width, height, toolbarHeight(), aspectRatio);
+        return DockedStreamGeometry.videoHeight(width, height, 0, aspectRatio);
     }
 
     @Override protected void onMeasure(int widthSpec, int heightSpec) {
@@ -57,7 +51,7 @@ public class DockedStreamLayout extends FrameLayout {
         int videoHeight = videoHeight(width, height);
         findViewById(R.id.surfaceView).measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(videoHeight, MeasureSpec.EXACTLY));
-        int panelHeight = Math.max(1, height - videoHeight - toolbarHeight());
+        int panelHeight = Math.max(1, height - videoHeight);
         for (int id : new int[] { R.id.controllerDock, R.id.inputDock }) {
             findViewById(id).measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(panelHeight, MeasureSpec.EXACTLY));
@@ -73,7 +67,7 @@ public class DockedStreamLayout extends FrameLayout {
         stream.layout(streamLeft, 0, streamLeft + stream.getMeasuredWidth(), stream.getMeasuredHeight());
         int panelTop = videoHeight(width, height);
         for (int id : new int[] { R.id.controllerDock, R.id.inputDock }) {
-            findViewById(id).layout(0, panelTop, width, height - toolbarHeight());
+            findViewById(id).layout(0, panelTop, width, height);
         }
     }
 }

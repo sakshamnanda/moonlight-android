@@ -11,8 +11,8 @@ android {
         minSdk 21
         targetSdk 36
 
-        versionName "12.2"
-        versionCode = 315
+        versionName "12.2-fold2"
+        versionCode = 316
 
         // Generate native debug symbols to allow Google Play to symbolicate our native crashes
         ndk.debugSymbolLevel = 'FULL'
@@ -84,7 +84,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
-            resValue "string", "app_label", "Moonlight (Debug)"
+            resValue "string", "app_label", "Moonlight Fold (Test)"
             resValue "string", "app_label_root", "Moonlight (Root Debug)"
         }
         release {

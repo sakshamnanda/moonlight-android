@@ -255,7 +255,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             });
             ((android.widget.LinearLayout) findViewById(R.id.inputDock)).addView(gamingKeyboard,
                     new android.widget.LinearLayout.LayoutParams(-1, -1));
-            findViewById(R.id.dockKeyboardToggle).setOnClickListener(v -> toggleKeyboard());
         }
 
         // Listen for touch events on the background touch view to enable trackpad mode

@@ -168,7 +168,8 @@ public abstract class VirtualControllerElement extends View {
 
     protected int getDefaultStrokeWidth() {
         DisplayMetrics screen = getResources().getDisplayMetrics();
-        return (int)(screen.heightPixels*0.004f);
+        return virtualController.isDocked() ? Math.max(1, Math.round(screen.density * 1.5f)) :
+                (int)(screen.heightPixels*0.004f);
     }
 
     protected void showConfigurationDialog() {

@@ -117,9 +117,11 @@ public class VirtualController {
         return metrics;
     }
 
+    public boolean isDocked() { return frame_layout.getId() == R.id.controllerDock; }
+
     public String getProfileName() {
         return VirtualControllerConfigurationLoader.OSC_PREFERENCE +
-                (frame_layout.getId() == R.id.controllerDock ? "_Docked" : "");
+                (frame_layout.getId() == R.id.controllerDock ? "_Docked_v2" : "");
     }
 
     public void hide() {
