@@ -365,7 +365,7 @@
     },
     {
       "label": "/",
-      "hint": "\\?",
+      "hint": "?",
       "code": 76,
       "shift": false,
       "weight": 7.1428571485

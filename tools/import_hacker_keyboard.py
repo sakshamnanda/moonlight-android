@@ -7,7 +7,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 source = Path('third_party/hackerskeyboard')
-strings = {e.attrib['name']: (e.text or '').replace('\\@', '@').replace('\\"', '"').replace("\\'", "'").replace('\\\\', '\\')
+strings = {e.attrib['name']: (e.text or '').replace('\\@', '@').replace('\\?', '?').replace('\\"', '"').replace("\\'", "'").replace('\\\\', '\\')
            for e in ET.parse(source / 'donottranslate-keymap.xml').getroot()}
 ns = '{http://schemas.android.com/apk/res-auto}'
 special = dict(tab=61, return_=66, space=62, shift=59, delete=67,
