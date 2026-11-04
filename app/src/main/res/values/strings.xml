@@ -309,7 +309,7 @@
     <string name="docked_controller">Controller below the stream</string>
     <string name="docked_controller_summary">Move the video to the top and place touch controls in a separate bottom panel.</string>
     <string name="builtin_keyboard">Built-in gaming keyboard</string>
-    <string name="builtin_keyboard_summary">Use a docked PC keyboard instead of the phone keyboard. Open it with the Keyboard button or a three-finger tap.</string>
+    <string name="builtin_keyboard_summary">Use a docked PC keyboard instead of the phone keyboard. Open it with a three-finger tap. Hacker’s Keyboard PC layouts with rounded, colour-accented keys.</string>
     <string name="dock_keyboard">Keyboard</string>
     <string name="dock_close_keyboard">Hide keyboard</string>
 </resources>

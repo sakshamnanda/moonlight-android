@@ -1,0 +1,460 @@
+[
+  [
+    {
+      "label": "`",
+      "hint": "~",
+      "code": 68,
+      "shift": false,
+      "weight": 4.5714285
+    },
+    {
+      "label": "1",
+      "hint": "!",
+      "code": 8,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "2",
+      "hint": "@",
+      "code": 9,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "3",
+      "hint": "#",
+      "code": 10,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "4",
+      "hint": "$",
+      "code": 11,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "5",
+      "hint": "%",
+      "code": 12,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "6",
+      "hint": "^",
+      "code": 13,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "7",
+      "hint": "&",
+      "code": 14,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "8",
+      "hint": "*",
+      "code": 15,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "9",
+      "hint": "(",
+      "code": 16,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "0",
+      "hint": ")",
+      "code": 7,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "-",
+      "hint": "_",
+      "code": 69,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "=",
+      "hint": "+",
+      "code": 70,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "⌫",
+      "hint": "",
+      "code": 67,
+      "shift": false,
+      "weight": 9.7142855
+    }
+  ],
+  [
+    {
+      "label": "⇥",
+      "hint": "",
+      "code": 61,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "q",
+      "hint": "",
+      "code": 45,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "w",
+      "hint": "",
+      "code": 51,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "e",
+      "hint": "",
+      "code": 33,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "r",
+      "hint": "",
+      "code": 46,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "t",
+      "hint": "",
+      "code": 48,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "y",
+      "hint": "",
+      "code": 53,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "u",
+      "hint": "",
+      "code": 49,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "i",
+      "hint": "",
+      "code": 37,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "o",
+      "hint": "",
+      "code": 43,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "p",
+      "hint": "",
+      "code": 44,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "[",
+      "hint": "{",
+      "code": 71,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "]",
+      "hint": "}",
+      "code": 72,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "\\",
+      "hint": "|",
+      "code": 73,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ],
+  [
+    {
+      "label": "Ctrl",
+      "hint": "",
+      "code": 113,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "a",
+      "hint": "",
+      "code": 29,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "s",
+      "hint": "",
+      "code": 47,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "d",
+      "hint": "",
+      "code": 32,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "f",
+      "hint": "",
+      "code": 34,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "g",
+      "hint": "",
+      "code": 35,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "h",
+      "hint": "",
+      "code": 36,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "j",
+      "hint": "",
+      "code": 38,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "k",
+      "hint": "",
+      "code": 39,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "l",
+      "hint": "",
+      "code": 40,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": ";",
+      "hint": ":",
+      "code": 74,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "'",
+      "hint": "\"",
+      "code": 75,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "↵",
+      "hint": "",
+      "code": 66,
+      "shift": false,
+      "weight": 10.7142855
+    }
+  ],
+  [
+    {
+      "label": "⇧",
+      "hint": "",
+      "code": 59,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "z",
+      "hint": "",
+      "code": 54,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "x",
+      "hint": "",
+      "code": 52,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "c",
+      "hint": "",
+      "code": 31,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "v",
+      "hint": "",
+      "code": 50,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "b",
+      "hint": "",
+      "code": 30,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "n",
+      "hint": "",
+      "code": 42,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "m",
+      "hint": "",
+      "code": 41,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": ",",
+      "hint": "<",
+      "code": 55,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": ".",
+      "hint": ">",
+      "code": 56,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "/",
+      "hint": "\\?",
+      "code": 76,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "↑",
+      "hint": "",
+      "code": 19,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "⇧",
+      "hint": "",
+      "code": 59,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ],
+  [
+    {
+      "label": "Esc",
+      "hint": "",
+      "code": 111,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "Caps",
+      "hint": "",
+      "code": 115,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "Alt",
+      "hint": "",
+      "code": 57,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "Win",
+      "hint": "",
+      "code": 117,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "English (US)",
+      "hint": "",
+      "code": 62,
+      "shift": false,
+      "weight": 32.1428571372
+    },
+    {
+      "label": "Fn",
+      "hint": "",
+      "code": -1,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "●",
+      "hint": "",
+      "code": 23,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "←",
+      "hint": "",
+      "code": 21,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "↓",
+      "hint": "",
+      "code": 20,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "→",
+      "hint": "",
+      "code": 22,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ]
+]

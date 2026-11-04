@@ -1,0 +1,404 @@
+[
+  [
+    {
+      "label": "Caps",
+      "hint": "",
+      "code": 115,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "F1",
+      "hint": "",
+      "code": 131,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F2",
+      "hint": "",
+      "code": 132,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F3",
+      "hint": "",
+      "code": 133,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F4",
+      "hint": "",
+      "code": 134,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "7",
+      "hint": "",
+      "code": 14,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "8",
+      "hint": "",
+      "code": 15,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "9",
+      "hint": "",
+      "code": 16,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "/",
+      "hint": "",
+      "code": 76,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "Home",
+      "hint": "",
+      "code": 122,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "⌫",
+      "hint": "",
+      "code": 67,
+      "shift": false,
+      "weight": 14.2857142
+    }
+  ],
+  [
+    {
+      "label": "⇥",
+      "hint": "",
+      "code": 61,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "F5",
+      "hint": "",
+      "code": 135,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F6",
+      "hint": "",
+      "code": 136,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F7",
+      "hint": "",
+      "code": 137,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F8",
+      "hint": "",
+      "code": 138,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "4",
+      "hint": "",
+      "code": 11,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "5",
+      "hint": "",
+      "code": 12,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "6",
+      "hint": "",
+      "code": 13,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "*",
+      "hint": "",
+      "code": 15,
+      "shift": true,
+      "weight": 8.035714
+    },
+    {
+      "label": "End",
+      "hint": "",
+      "code": 123,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "Ins",
+      "hint": "",
+      "code": 124,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "Del",
+      "hint": "",
+      "code": 112,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ],
+  [
+    {
+      "label": "Ctrl",
+      "hint": "",
+      "code": 113,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "F9",
+      "hint": "",
+      "code": 139,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F10",
+      "hint": "",
+      "code": 140,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F11",
+      "hint": "",
+      "code": 141,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "F12",
+      "hint": "",
+      "code": 142,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "1",
+      "hint": "",
+      "code": 8,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "2",
+      "hint": "",
+      "code": 9,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "3",
+      "hint": "",
+      "code": 10,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "-",
+      "hint": "",
+      "code": 69,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "PgUp",
+      "hint": "",
+      "code": 92,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "↵",
+      "hint": "",
+      "code": 66,
+      "shift": false,
+      "weight": 14.2857142
+    }
+  ],
+  [
+    {
+      "label": "⇧",
+      "hint": "",
+      "code": 59,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "SyRq",
+      "hint": "",
+      "code": 120,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "ScrL",
+      "hint": "",
+      "code": 116,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "Brk",
+      "hint": "",
+      "code": 121,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "NumL",
+      "hint": "",
+      "code": 143,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "0",
+      "hint": "",
+      "code": 7,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": ",",
+      "hint": "",
+      "code": 55,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": ".",
+      "hint": "",
+      "code": 56,
+      "shift": false,
+      "weight": 8.035714
+    },
+    {
+      "label": "+",
+      "hint": "",
+      "code": 70,
+      "shift": true,
+      "weight": 8.035714
+    },
+    {
+      "label": "PgDn",
+      "hint": "",
+      "code": 93,
+      "shift": false,
+      "weight": 10.7142857143
+    },
+    {
+      "label": "↑",
+      "hint": "",
+      "code": 19,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "⇧",
+      "hint": "",
+      "code": 59,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ],
+  [
+    {
+      "label": "Esc",
+      "hint": "",
+      "code": 111,
+      "shift": false,
+      "weight": 10.7142855
+    },
+    {
+      "label": "Caps",
+      "hint": "",
+      "code": 115,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "Alt",
+      "hint": "",
+      "code": 57,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "Win",
+      "hint": "",
+      "code": 117,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "English (US)",
+      "hint": "",
+      "code": 62,
+      "shift": false,
+      "weight": 32.1428571372
+    },
+    {
+      "label": "Fn",
+      "hint": "",
+      "code": -1,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "●",
+      "hint": "",
+      "code": 23,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "←",
+      "hint": "",
+      "code": 21,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "↓",
+      "hint": "",
+      "code": 20,
+      "shift": false,
+      "weight": 7.1428571485
+    },
+    {
+      "label": "→",
+      "hint": "",
+      "code": 22,
+      "shift": false,
+      "weight": 7.1428571485
+    }
+  ]
+]
