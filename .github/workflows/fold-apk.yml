@@ -1,4 +1,4 @@
-name: Fold keyboard APK
+name: Fold keyboard and controller APK
 on:
   workflow_dispatch:
   push:
@@ -18,48 +18,118 @@ jobs:
           distribution: temurin
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Publish reviewed keyboard integration
+      - name: Publish reviewed keyboard and controller fixes
         env:
           FOLD_PATCH: >-
-            eNqtk81u4yAUhfc8xZU3JIqNY49jp5WiZtP9LLqbjCIM1zETDBYQTauq7z64adSfTTWdYWHg07nmco6Qqusgyw4qAM/5OObe
-            iXzgyuTceww+77k4ovNHfGgtdzI/tnLfnbRmv7w10P59DVFG4j1Uay5k03LGrsqy4oUQUCyXdVWRLMu+0gtZLBZf6me7hexb
-            vUobWJyn7ZbANJ7S8/x4ngASzVvUyTUkeZKS7AX2yoSJ7XY3kS4+0IldyoWVGFlTvyLfq27SdVx7fMW/UR36iTesqMr1qimq
-            9YrIt2EFa7XP1TBaF/bnG+4vN2TjQ7TiE8VLEKVYletyWTBWLOurZSXl+yA++8vZ9s9Uk8nNZHHzbDB0zg4w8tBr1cK5DL7H
-            Lbls7gfNMDhEdqtxQBPu4hq4h9s7AgS8PTmBsHkumtHQKyf3I3fh4WPadE4yH5wyBx/lj8h4iLv2BzV8QPrzGmbIAt4HsA4o
-            nTOHo+YCZ3S329IU6PY9SyaWvGExd5qkkNDknS7SKIzfOVn8x+NvJnbzzy3Bm9HFkxGUic6y6KDH2Yu5OVBpjY39cuM1D5hF
-            Twc+sphNPO0Q47E2zOZPBMx0OfrYhzBe57kXPQ7cM26ks0oyYYf4Lo+5Q5/xU7BPNAY4olBcxzKpRJgF3m7qIgWH4eTMflPX
-            aZTExjd1GVfTK9msrlKQqDFE2KTkD7ugeA8=
+            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
         run: |
           python3 - <<'PYCODE'
           import os, base64, zlib, hashlib, pathlib
           patch = zlib.decompress(base64.b64decode(os.environ['FOLD_PATCH']))
-          assert hashlib.sha256(patch).hexdigest() == 'be38fbde7b7a67028cef801d98adc8974fd20585a3c4d41de57de5099cab9685'
-          pathlib.Path('/tmp/keyboard.patch').write_bytes(patch)
+          assert hashlib.sha256(patch).hexdigest() == '9bbd995ca9672990fdc30cf3a5ceee47125dbcf4179327beaea535aad78ca14b'
+          pathlib.Path('/tmp/fold4.patch').write_bytes(patch)
           PYCODE
-          if git apply --check /tmp/keyboard.patch; then
-            git apply /tmp/keyboard.patch
+          if git apply --check /tmp/fold4.patch; then
+            git apply /tmp/fold4.patch
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add app tests third_party tools
-            git commit -m "Decode escaped question-mark label in imported keyboard"
+            git commit -m 'Fit PC keyboard to dock and announce on-screen Xbox controller on connect'
             git push origin "HEAD:$GITHUB_REF_NAME"
           else
-            git apply --reverse --check /tmp/keyboard.patch
+            git apply --reverse --check /tmp/fold4.patch
           fi
       - name: Check keyboard input and dock geometry
         run: |
           python3 tools/import_hacker_keyboard.py
           git diff --exit-code -- app/src/main/assets/hackerskeyboard
           mkdir -p /tmp/fold-checks
-          javac -d /tmp/fold-checks app/src/main/java/com/limelight/ui/KeyboardKeyState.java app/src/main/java/com/limelight/ui/DockedStreamGeometry.java app/src/main/java/com/limelight/binding/input/virtual_controller/DockedControllerLayout.java tests/KeyboardKeyStateCheck.java tests/DockedStreamGeometryCheck.java tests/DockedControllerLayoutCheck.java
+          javac -d /tmp/fold-checks app/src/main/java/com/limelight/ui/KeyboardKeyState.java app/src/main/java/com/limelight/ui/GamingKeyboardGeometry.java app/src/main/java/com/limelight/ui/DockedStreamGeometry.java app/src/main/java/com/limelight/binding/input/virtual_controller/DockedControllerLayout.java tests/KeyboardKeyStateCheck.java tests/GamingKeyboardGeometryCheck.java tests/DockedStreamGeometryCheck.java tests/DockedControllerLayoutCheck.java
           java -cp /tmp/fold-checks KeyboardKeyStateCheck
+          java -cp /tmp/fold-checks GamingKeyboardGeometryCheck
           java -cp /tmp/fold-checks DockedStreamGeometryCheck
           java -cp /tmp/fold-checks DockedControllerLayoutCheck
       - name: Build APK
         run: ./gradlew assembleNonRootDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: Moonlight-Fold-Keyboard-v3
+          name: Moonlight-Fold-Keyboard-Controller-v4
           path: app/build/outputs/apk/nonRoot/debug/*.apk
       - name: Lint
         run: ./gradlew lintNonRootDebug
