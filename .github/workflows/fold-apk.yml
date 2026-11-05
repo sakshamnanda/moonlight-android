@@ -1,4 +1,4 @@
-name: Fold keyboard and controller APK
+name: Fold keyboard alignment APK
 on:
   workflow_dispatch:
   push:
@@ -18,118 +18,94 @@ jobs:
           distribution: temurin
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Publish reviewed keyboard and controller fixes
+      - name: Publish keyboard alignment and dark theme fixes
         env:
           FOLD_PATCH: >-
-            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
+            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
+            QtRbTVEZAI5eR17MvuA9vXL0PwDmYjY=
         run: |
-          python3 - <<'PYCODE'
-          import os, base64, zlib, hashlib, pathlib
+          python3 - <<'PY'
+          import base64, zlib, os, hashlib, pathlib
           patch = zlib.decompress(base64.b64decode(os.environ['FOLD_PATCH']))
-          assert hashlib.sha256(patch).hexdigest() == '9bbd995ca9672990fdc30cf3a5ceee47125dbcf4179327beaea535aad78ca14b'
-          pathlib.Path('/tmp/fold4.patch').write_bytes(patch)
-          PYCODE
-          if git apply --check /tmp/fold4.patch; then
-            git apply /tmp/fold4.patch
+          assert hashlib.sha256(patch).hexdigest() == '8cae5e9243d2c7e6ed6b4a470057cd9f303ee09e95a379d45aee80dd9cfc6ec0'
+          pathlib.Path('/tmp/fold5.patch').write_bytes(patch)
+          PY
+          if git apply --check /tmp/fold5.patch; then
+            git apply /tmp/fold5.patch
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add app tests third_party tools
-            git commit -m 'Fit PC keyboard to dock and announce on-screen Xbox controller on connect'
-            git push origin "HEAD:$GITHUB_REF_NAME"
+            git add app tests tools
+            git commit -m 'Align normal and Fn keyboard slots and unify charcoal key theme'
+            git push origin HEAD:"$GITHUB_REF_NAME"
           else
-            git apply --reverse --check /tmp/fold4.patch
+            git apply --reverse --check /tmp/fold5.patch
           fi
-      - name: Check keyboard input and dock geometry
+      - name: Check keyboard assets and input geometry
         run: |
           python3 tools/import_hacker_keyboard.py
           git diff --exit-code -- app/src/main/assets/hackerskeyboard
-          mkdir -p /tmp/fold-checks
-          javac -d /tmp/fold-checks app/src/main/java/com/limelight/ui/KeyboardKeyState.java app/src/main/java/com/limelight/ui/GamingKeyboardGeometry.java app/src/main/java/com/limelight/ui/DockedStreamGeometry.java app/src/main/java/com/limelight/binding/input/virtual_controller/DockedControllerLayout.java tests/KeyboardKeyStateCheck.java tests/GamingKeyboardGeometryCheck.java tests/DockedStreamGeometryCheck.java tests/DockedControllerLayoutCheck.java
-          java -cp /tmp/fold-checks KeyboardKeyStateCheck
+          javac -d /tmp/fold-checks app/src/main/java/com/limelight/ui/GamingKeyboardGeometry.java app/src/main/java/com/limelight/ui/DockedStreamGeometry.java app/src/main/java/com/limelight/ui/KeyboardKeyState.java app/src/main/java/com/limelight/binding/input/virtual_controller/DockedControllerLayout.java tests/GamingKeyboardGeometryCheck.java tests/DockedStreamGeometryCheck.java tests/KeyboardKeyStateCheck.java tests/DockedControllerLayoutCheck.java
           java -cp /tmp/fold-checks GamingKeyboardGeometryCheck
           java -cp /tmp/fold-checks DockedStreamGeometryCheck
+          java -cp /tmp/fold-checks KeyboardKeyStateCheck
           java -cp /tmp/fold-checks DockedControllerLayoutCheck
-      - name: Build APK
-        run: ./gradlew assembleNonRootDebug
+      - name: Build test APK
+        run: ./gradlew :app:assembleNonRootDebug --console=plain
       - uses: actions/upload-artifact@v4
         with:
-          name: Moonlight-Fold-Keyboard-Controller-v4
+          name: Moonlight-Fold-Keyboard-v5
           path: app/build/outputs/apk/nonRoot/debug/*.apk
       - name: Lint
-        run: ./gradlew lintNonRootDebug
+        run: ./gradlew :app:lintNonRootDebug --console=plain
