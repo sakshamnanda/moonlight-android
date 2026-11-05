@@ -2459,6 +2459,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
                 connected = true;
                 connecting = false;
+                controllerHandler.onConnectionStarted();
                 updatePipAutoEnter();
 
                 // Hide the mouse cursor now after a short delay.

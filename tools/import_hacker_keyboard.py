@@ -12,7 +12,7 @@ strings = {e.attrib['name']: (e.text or '').replace('\\@', '@').replace('\\?', '
 ns = '{http://schemas.android.com/apk/res-auto}'
 special = dict(tab=61, return_=66, space=62, shift=59, delete=67,
                ctrl_left=113, alt_left=57, meta_left=117, escape=111,
-               fn=-1, settings=115, f1=115, dpad_center=23,
+               fn=-1, settings=115, f1=115, dpad_center=82,
                dpad_up=19, dpad_down=20, dpad_left=21, dpad_right=22,
                page_up=92, page_down=93, home=122, end=123, insert=124,
                forward_del=112, sysrq=120, scroll_lock=116, break_=121, num_lock=143)
@@ -20,7 +20,7 @@ special['return'] = special.pop('return_')
 special['break'] = special.pop('break_')
 special.update({f'fkey_f{i}':130+i for i in range(1,13)})
 labels = {61:'⇥',66:'↵',62:'English (US)',59:'⇧',67:'⌫',115:'Caps',
-          117:'Win',23:'●',19:'↑',20:'↓',21:'←',22:'→'}
+          117:'Win',82:'☰',19:'↑',20:'↓',21:'←',22:'→'}
 chars = {chr(i+97):29+i for i in range(26)}
 chars.update({str(i):7+i for i in range(10)})
 chars.update(dict(zip('`,./;\'[]\\-=',[68,55,56,76,74,75,71,72,73,69,70])))

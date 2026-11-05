@@ -41,6 +41,10 @@ public class DockedStreamLayout extends FrameLayout {
 
     private boolean isDocked() { return !pictureInPicture && (controllerEnabled || keyboardVisible); }
     private int videoHeight(int width, int height) {
+        if (keyboardVisible) {
+            return DockedStreamGeometry.keyboardVideoHeight(width, height, aspectRatio,
+                    getResources().getDisplayMetrics().density);
+        }
         return DockedStreamGeometry.videoHeight(width, height, 0, aspectRatio);
     }
 

@@ -11,7 +11,8 @@ kbd_full_fn.xml and donottranslate-keymap.xml with tools/import_hacker_keyboard.
 Generated assets are used directly by GamingKeyboard. Android PC keycodes
 replace upstream IME codes. Blank ISO keys and the optional extension row are
 omitted; Fn provides F1–F12, navigation and number keys. The IME settings key
-becomes Caps Lock. Samsung-inspired rendering, haptics, modifier state and
+becomes Caps Lock and the centre navigation key becomes the PC context menu key.
+Samsung-inspired rendering, haptics, modifier state and
 Moonlight event forwarding are new code. This does not install a system IME
 or include Samsung code, dictionaries, predictions or language packs.
 

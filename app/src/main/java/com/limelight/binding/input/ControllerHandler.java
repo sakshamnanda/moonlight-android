@@ -2784,6 +2784,23 @@ public class ControllerHandler implements InputManager.InputDeviceListener, UsbD
         return true;
     }
 
+    /** Called once transport is ready; constructor-time OSC packets cannot register a pad. */
+    public void onConnectionStarted() {
+        if (prefConfig.onscreenController) {
+            int buttons = ControllerPacket.A_FLAG | ControllerPacket.B_FLAG |
+                    ControllerPacket.X_FLAG | ControllerPacket.Y_FLAG |
+                    ControllerPacket.UP_FLAG | ControllerPacket.DOWN_FLAG |
+                    ControllerPacket.LEFT_FLAG | ControllerPacket.RIGHT_FLAG |
+                    ControllerPacket.LB_FLAG | ControllerPacket.RB_FLAG |
+                    ControllerPacket.PLAY_FLAG | ControllerPacket.BACK_FLAG |
+                    ControllerPacket.LS_CLK_FLAG | ControllerPacket.RS_CLK_FLAG |
+                    ControllerPacket.SPECIAL_BUTTON_FLAG;
+            conn.sendControllerArrivalEvent((byte) 0, getActiveControllerMask(),
+                    MoonBridge.LI_CTYPE_XBOX, buttons, MoonBridge.LI_CCAP_ANALOG_TRIGGERS);
+            sendControllerInputPacket(defaultContext);
+        }
+    }
+
     public void reportOscState(int buttonFlags,
                                short leftStickX, short leftStickY,
                                short rightStickX, short rightStickY,
