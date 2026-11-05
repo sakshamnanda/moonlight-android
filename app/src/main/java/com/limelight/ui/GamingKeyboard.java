@@ -61,8 +61,6 @@ public class GamingKeyboard extends ViewGroup {
                     JSONObject entry = entries.getJSONObject(k);
                     KeyView key = new KeyView(entry);
                     rowWeights[r][k] = (float)entry.getDouble("weight");
-                    // The upstream empty ISO slot is omitted in US English: widen left Shift.
-                    if (!fn && r == 3 && k == 0) rowWeights[r][k] = 14.285714f;
                     addView(key, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
                     keys.add(key);
                 }
@@ -110,25 +108,24 @@ public class GamingKeyboard extends ViewGroup {
             setClickable(true);
         }
 
-        private int accent() {
-            if (code == -1 || (code >= 131 && code <= 143)) return Color.rgb(193, 167, 255);
-            if (KeyboardKeyState.isModifier(code) || code == 115) return Color.rgb(132, 179, 255);
-            if ((code >= 19 && code <= 23) || (code >= 92 && code <= 93) || (code >= 122 && code <= 124)) return Color.rgb(117, 223, 207);
-            if (code == 66) return Color.rgb(156, 199, 255);
-            return Color.rgb(241, 242, 247);
+        private boolean utilityKey() {
+            return KeyboardKeyState.isModifier(code) || code == -1 || code == 115 || code == 66
+                    || code == 111 || code == 67 || code == 61 || code == 82 || code == 112
+                    || (code >= 19 && code <= 23) || (code >= 92 && code <= 93)
+                    || (code >= 120 && code <= 124) || (code >= 131 && code <= 143);
         }
 
         @Override protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
             boolean active = held || state.isDown(code) || (code == -1 && fn) || (code == 115 && caps);
-            boolean special = KeyboardKeyState.isModifier(code) || code == -1 || code == 115 || code == 66 || code == 111 || code == 67;
-            paint.setColor(active ? Color.rgb(54, 81, 121) : special ? Color.rgb(31, 34, 43) : Color.rgb(54, 55, 62));
+            boolean special = utilityKey();
+            paint.setColor(active ? Color.rgb(43, 52, 66) : special ? Color.rgb(28, 29, 33) : Color.rgb(52, 53, 57));
             float radius = Math.min(dp(7), getHeight() * .18f);
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), radius, radius, paint);
             if (active) {
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(dp(1));
-                paint.setColor(accent());
+                paint.setColor(Color.rgb(145, 166, 196));
                 canvas.drawRoundRect(dp(1), dp(1), getWidth()-dp(1), getHeight()-dp(1), radius, radius, paint);
                 paint.setStyle(Paint.Style.FILL);
             }
@@ -140,11 +137,11 @@ public class GamingKeyboard extends ViewGroup {
             paint.setTextSize(Math.min(dp(code == 62 ? 12 : text.length() > 2 ? 14 : 21), getHeight() * .38f));
             float available = Math.max(1, getWidth() * .80f);
             if (paint.measureText(text) > available) paint.setTextSize(paint.getTextSize() * available / paint.measureText(text));
-            paint.setColor(accent());
+            paint.setColor(active ? Color.rgb(175, 194, 220) : Color.rgb(230, 231, 234));
             Paint.FontMetrics metrics = paint.getFontMetrics();
-            canvas.drawText(text, getWidth()/2f, getHeight() * (hint.isEmpty() || shift ? .5f : .58f) - (metrics.ascent+metrics.descent)/2f, paint);
+            canvas.drawText(text, getWidth()/2f, getHeight() * .56f - (metrics.ascent+metrics.descent)/2f, paint);
             if (!hint.isEmpty() && !shift) {
-                paint.setColor(Color.rgb(165, 170, 186));
+                paint.setColor(Color.rgb(153, 156, 163));
                 paint.setTextAlign(Paint.Align.RIGHT);
                 paint.setTextSize(Math.min(dp(10), Math.min(getHeight() * .20f, getWidth() * .22f)));
                 canvas.drawText(hint, getWidth() * .90f, getHeight() * .05f - paint.getFontMetrics().ascent, paint);

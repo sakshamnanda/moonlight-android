@@ -52,6 +52,9 @@ for name in ('kbd_full','kbd_full_fn'):
             keys.append(dict(label=label, hint=get('shiftLabel') if code!=62 else '',
                              code=code, shift=shift,
                              weight=float(get('keyWidth').replace('%p','') or '7.1428571485')))
+        # Keep the omitted ISO slot in the left Shift footprint, in the asset itself.
+        if name == 'kbd_full' and len(rows) == 3:
+            keys[0]['weight'] += 7.1428571485
         rows.append(keys)
     assert len(rows)==5
     Path('app/src/main/assets/hackerskeyboard/'+name+'.json').write_text(

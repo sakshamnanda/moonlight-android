@@ -13,14 +13,16 @@ public final class GamingKeyboardGeometry {
         for (int r = 0; r < weights.length; r++) {
             float total = 0;
             for (float weight : weights[r]) total += weight;
-            int usable = width - 2 * padding - gap * (weights[r].length - 1);
+            // Widths describe complete slots, including their gaps. Removing all gaps
+            // before weighting stretches rows differently when their key counts differ.
+            int usable = width - 2 * padding + gap;
             float cumulative = 0;
             int top = padding + Math.round((height - 2f * padding) * r / weights.length);
             int bottom = padding + Math.round((height - 2f * padding) * (r + 1) / weights.length);
             for (int k = 0; k < weights[r].length; k++) {
-                int left = padding + gap * k + Math.round(usable * cumulative / total);
+                int left = padding + Math.round(usable * cumulative / total);
                 cumulative += weights[r][k];
-                int right = padding + gap * k + Math.round(usable * cumulative / total);
+                int right = padding + Math.round(usable * cumulative / total) - gap;
                 result[index++] = new int[] {left, top + gap / 2, right, bottom - (gap + 1) / 2};
             }
         }
