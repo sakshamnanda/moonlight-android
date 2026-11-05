@@ -5,7 +5,7 @@ import java.util.Map;
 
 /** Geometry for the controller panel, independent of display resolution and video size. */
 public final class DockedControllerLayout {
-    public enum Slot { LT, LB, BACK, GUIDE, START, RT, RB, DPAD, LEFT_STICK, RIGHT_STICK, A, B, X, Y }
+    public enum Slot { LT, LB, BACK, GUIDE, START, RT, RB, DPAD, LEFT_STICK, RIGHT_STICK, A, B, X, Y, SWAP }
 
     public static final class Bounds {
         public final int x, y, width, height;
@@ -20,6 +20,10 @@ public final class DockedControllerLayout {
     private DockedControllerLayout() {}
 
     public static Map<Slot, Bounds> calculate(int width, int height, float density) {
+        return calculate(width, height, density, false);
+    }
+
+    public static Map<Slot, Bounds> calculate(int width, int height, float density, boolean dpadOutside) {
         Map<Slot, Bounds> slots = new EnumMap<>(Slot.class);
         float edge = Math.min(12 * density, Math.min(width, height) * 0.035f);
         float gap = Math.min(10 * density, Math.min(width * 0.01f, height * 0.025f));
@@ -35,10 +39,15 @@ public final class DockedControllerLayout {
         float bodyTop = rowY + rowHeight + gap;
         float bodyHeight = Math.max(1, height - edge - bodyTop);
         float centerY = bodyTop + bodyHeight / 2;
-        float stickSize = Math.min(112 * density, Math.min(bodyHeight * 0.70f, width * 0.16f));
-        circle(slots, Slot.DPAD, width * 0.11f, centerY, stickSize);
-        circle(slots, Slot.LEFT_STICK, width * 0.32f, centerY, stickSize);
+        float dpadSize = Math.min(112 * density, Math.min(bodyHeight * 0.70f, width * 0.16f));
+        float stickSize = Math.min(134 * density, Math.min(bodyHeight * 0.84f, width * 0.185f));
+        circle(slots, Slot.DPAD, width * (dpadOutside ? 0.11f : 0.32f), centerY, dpadSize);
+        circle(slots, Slot.LEFT_STICK, width * (dpadOutside ? 0.32f : 0.11f), centerY, stickSize);
         circle(slots, Slot.RIGHT_STICK, width * 0.64f, centerY, stickSize);
+        float swapWidth = Math.min(82 * density, width * 0.11f);
+        float swapHeight = Math.min(36 * density, bodyHeight * 0.24f);
+        slots.put(Slot.SWAP, new Bounds(width * .48f - swapWidth / 2,
+                centerY - swapHeight / 2, swapWidth, swapHeight));
 
         float faceSize = Math.min(48 * density, Math.min(bodyHeight * 0.26f, width * 0.065f));
         float spread = Math.min(bodyHeight * 0.31f, width * 0.073f);

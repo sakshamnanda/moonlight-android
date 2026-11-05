@@ -199,7 +199,7 @@ public class VirtualControllerConfigurationLoader {
     private static void createDockedLayout(VirtualController controller, Context context,
             DisplayMetrics screen, PreferenceConfiguration config) {
         java.util.Map<DockedControllerLayout.Slot, DockedControllerLayout.Bounds> slots =
-                DockedControllerLayout.calculate(screen.widthPixels, screen.heightPixels, screen.density);
+                DockedControllerLayout.calculate(screen.widthPixels, screen.heightPixels, screen.density, controller.isDpadOutside());
         if (config.onlyL3R3) {
             addDockedElement(controller, createDigitalButton(VirtualControllerElement.EID_LSB,
                     ControllerPacket.LS_CLK_FLAG, 0, 1, "L3", -1, controller, context), slots,

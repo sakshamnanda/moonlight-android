@@ -312,4 +312,5 @@
     <string name="builtin_keyboard_summary">Use a docked PC keyboard instead of the phone keyboard. Open it with a three-finger tap. Hacker’s Keyboard PC layouts with rounded, colour-accented keys.</string>
     <string name="dock_keyboard">Keyboard</string>
     <string name="dock_close_keyboard">Hide keyboard</string>
+    <string name="swap_dpad_stick">Swap D-pad and left stick</string>
 </resources>

@@ -5,6 +5,7 @@
 package com.limelight.binding.input.virtual_controller;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -57,6 +58,8 @@ public class VirtualController {
 
     private Button buttonConfigure = null;
     private boolean shown = true;
+    private Button buttonSwap;
+    private boolean dpadOutside;
     private final Runnable refreshLayoutRunnable = this::refreshLayoutNow;
 
     private List<VirtualControllerElement> elements = new ArrayList<>();
@@ -68,6 +71,30 @@ public class VirtualController {
         this.handler = new Handler(Looper.getMainLooper());
 
         if (isDocked()) {
+            dpadOutside = context.getSharedPreferences("DockedControllerOptions", Context.MODE_PRIVATE)
+                    .getBoolean("dpadOutside", false);
+            buttonSwap = new Button(context);
+            buttonSwap.setText("⇄");
+            buttonSwap.setTextColor(0xFFE6E7EA);
+            buttonSwap.setTextSize(20);
+            buttonSwap.setPadding(0, 0, 0, 0);
+            buttonSwap.setMinWidth(0);
+            buttonSwap.setMinHeight(0);
+            buttonSwap.setMinimumWidth(0);
+            buttonSwap.setMinimumHeight(0);
+            buttonSwap.setFocusable(false);
+            buttonSwap.setContentDescription(context.getString(R.string.swap_dpad_stick));
+            GradientDrawable background = new GradientDrawable();
+            background.setColor(0xFF1C1D21);
+            background.setCornerRadius(7 * context.getResources().getDisplayMetrics().density);
+            buttonSwap.setBackground(background);
+            buttonSwap.setOnClickListener(v -> {
+                releaseAll();
+                dpadOutside = !dpadOutside;
+                context.getSharedPreferences("DockedControllerOptions", Context.MODE_PRIVATE).edit()
+                        .putBoolean("dpadOutside", dpadOutside).apply();
+                refreshLayout();
+            });
             // Rebuild after layout has finished, when the dock has its final bounds.
             // Adding children from inside the parent's layout callback can leave
             // them unmeasured until a later traversal.
@@ -130,9 +157,11 @@ public class VirtualController {
 
     public boolean isDocked() { return frame_layout.getId() == R.id.controllerDock; }
 
+    public boolean isDpadOutside() { return dpadOutside; }
+
     public String getProfileName() {
         return VirtualControllerConfigurationLoader.OSC_PREFERENCE +
-                (frame_layout.getId() == R.id.controllerDock ? "_Docked_v2" : "");
+                (isDocked() ? (dpadOutside ? "_Docked_v3_DpadOutside" : "_Docked_v3") : "");
     }
 
     public void hide() {
@@ -143,6 +172,7 @@ public class VirtualController {
         }
 
         buttonConfigure.setVisibility(View.INVISIBLE);
+        if (buttonSwap != null) buttonSwap.setVisibility(View.INVISIBLE);
     }
 
     public void show() {
@@ -153,6 +183,7 @@ public class VirtualController {
         }
 
         buttonConfigure.setVisibility(View.VISIBLE);
+        if (buttonSwap != null) buttonSwap.setVisibility(View.VISIBLE);
     }
 
     public void removeElements() {
@@ -162,6 +193,7 @@ public class VirtualController {
         elements.clear();
 
         frame_layout.removeView(buttonConfigure);
+        if (buttonSwap != null) frame_layout.removeView(buttonSwap);
     }
 
     public void setOpacity(int opacity) {
@@ -227,6 +259,16 @@ public class VirtualController {
             element.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
         }
         buttonConfigure.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
+        if (buttonSwap != null) {
+            DockedControllerLayout.Bounds b = DockedControllerLayout.calculate(
+                    screen.widthPixels, screen.heightPixels, screen.density, dpadOutside)
+                    .get(DockedControllerLayout.Slot.SWAP);
+            FrameLayout.LayoutParams swapParams = new FrameLayout.LayoutParams(b.width, b.height);
+            swapParams.leftMargin = b.x;
+            swapParams.topMargin = b.y;
+            frame_layout.addView(buttonSwap, swapParams);
+            buttonSwap.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     public ControllerMode getControllerMode() {
