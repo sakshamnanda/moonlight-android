@@ -36,7 +36,7 @@ public class GamingKeyboardGeometryCheck {
                 for (int r=1;r<5;r++) offsets[r]=offsets[r-1]+rows[r-1].length;
                 for (int i=0;i<cells.length;i++) {
                     int[] a=cells[i];
-                    if (a[0]<0 || a[1]<0 || a[2]>size[0] || a[3]>height || a[2]-a[0]<20 || a[3]-a[1]<24)
+                    if (a[0]<0 || a[1]<0 || a[2]>size[0] || a[3]>height || a[2]-a[0]<20 || a[3]-a[1]<(height < 150 ? 18 : 24))
                         throw new AssertionError("Unusable key bounds");
                     for (int j=0;j<i;j++) {
                         int[] b=cells[j];

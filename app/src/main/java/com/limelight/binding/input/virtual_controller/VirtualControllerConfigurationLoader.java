@@ -433,7 +433,14 @@ public class VirtualControllerConfigurationLoader {
             String jsonConfig = pref.getString(prefKey, null);
             if (jsonConfig != null) {
                 try {
-                    element.loadConfiguration(new JSONObject(jsonConfig));
+                    JSONObject saved = new JSONObject(jsonConfig);
+                    if (controller.isDocked() &&
+                            (saved.getInt("WIDTH") <= 1 || saved.getInt("HEIGHT") <= 1)) {
+                        // Discard only unusable entries saved against a zero-sized dock.
+                        pref.edit().remove(prefKey).apply();
+                    } else {
+                        element.loadConfiguration(saved);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
 

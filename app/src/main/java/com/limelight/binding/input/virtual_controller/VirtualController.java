@@ -56,6 +56,8 @@ public class VirtualController {
     ControllerInputContext inputContext = new ControllerInputContext();
 
     private Button buttonConfigure = null;
+    private boolean shown = true;
+    private final Runnable refreshLayoutRunnable = this::refreshLayoutNow;
 
     private List<VirtualControllerElement> elements = new ArrayList<>();
 
@@ -64,6 +66,15 @@ public class VirtualController {
         this.frame_layout = layout;
         this.context = context;
         this.handler = new Handler(Looper.getMainLooper());
+
+        if (isDocked()) {
+            // Rebuild after layout has finished, when the dock has its final bounds.
+            // Adding children from inside the parent's layout callback can leave
+            // them unmeasured until a later traversal.
+            frame_layout.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
+                if (r - l != or - ol || b - t != ob - ot) refreshLayout();
+            });
+        }
 
         buttonConfigure = new Button(context);
         buttonConfigure.setAlpha(0.25f);
@@ -125,6 +136,7 @@ public class VirtualController {
     }
 
     public void hide() {
+        shown = false;
         releaseAll();
         for (VirtualControllerElement element : elements) {
             element.setVisibility(View.INVISIBLE);
@@ -134,6 +146,8 @@ public class VirtualController {
     }
 
     public void show() {
+        shown = true;
+        if (isDocked() && elements.isEmpty()) refreshLayout();
         for (VirtualControllerElement element : elements) {
             element.setVisibility(View.VISIBLE);
         }
@@ -182,6 +196,17 @@ public class VirtualController {
     }
 
     public void refreshLayout() {
+        if (isDocked()) {
+            handler.removeCallbacks(refreshLayoutRunnable);
+            handler.post(refreshLayoutRunnable);
+        } else {
+            refreshLayoutNow();
+        }
+    }
+
+    private void refreshLayoutNow() {
+        // Do not generate or restore a profile against the initial zero-sized dock.
+        if (isDocked() && (frame_layout.getWidth() <= 1 || frame_layout.getHeight() <= 1)) return;
         releaseAll();
         removeElements();
 
@@ -198,6 +223,10 @@ public class VirtualController {
 
         // Apply user preferences onto the default layout
         VirtualControllerConfigurationLoader.loadFromPreferences(this, context);
+        for (VirtualControllerElement element : elements) {
+            element.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
+        }
+        buttonConfigure.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
     }
 
     public ControllerMode getControllerMode() {

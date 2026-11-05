@@ -5,10 +5,9 @@ public final class DockedStreamGeometry {
     private DockedStreamGeometry() {}
 
     public static int keyboardVideoHeight(int width, int height, double aspectRatio, float density) {
-        // Five PC rows need finger-sized targets even on the narrow landscape cover screen.
-        int desiredPanel = Math.max((int) (height * .40), Math.round(5 * 38 * density));
-        int panel = Math.min(desiredPanel, (int) (height * .58));
-        return Math.max(1, Math.min((int) (width / aspectRatio), height - panel));
+        // Match the original dock footprint. Fit keys inside the available panel
+        // instead of shrinking the stream according to screen density.
+        return videoHeight(width, height, 0, aspectRatio);
     }
 
     public static int videoHeight(int width, int height, int toolbarHeight, double aspectRatio) {

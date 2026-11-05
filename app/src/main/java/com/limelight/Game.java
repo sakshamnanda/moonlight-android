@@ -525,12 +525,6 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             virtualController = new VirtualController(controllerHandler,
                     prefConfig.dockedController ? findViewById(R.id.controllerDock) : (FrameLayout)streamView.getParent(),
                     this);
-            if (prefConfig.dockedController) {
-                View dock = findViewById(R.id.controllerDock);
-                dock.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
-                    if (r - l != or - ol || b - t != ob - ot) virtualController.refreshLayout();
-                });
-            }
             virtualController.refreshLayout();
             virtualController.show();
         }
@@ -641,7 +635,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                 // Restore overlays to previous state when leaving PiP
 
                 if (virtualController != null &&
-                        !(gamingKeyboard != null && dockedLayout.isKeyboardVisible() && !prefConfig.dockedController)) {
+                        !(gamingKeyboard != null && dockedLayout.isKeyboardVisible())) {
                     virtualController.show();
                 }
 
@@ -1538,9 +1532,12 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             gamingKeyboard.releaseAll();
             if (virtualController != null) virtualController.releaseAll();
             dockedLayout.toggleKeyboard();
-            if (virtualController != null && !prefConfig.dockedController) {
+            if (virtualController != null) {
                 if (dockedLayout.isKeyboardVisible()) virtualController.hide();
-                else virtualController.show();
+                else {
+                    virtualController.show();
+                    virtualController.refreshLayout();
+                }
             }
             streamView.requestFocus();
             return;
