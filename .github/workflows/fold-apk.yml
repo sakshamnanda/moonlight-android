@@ -1,4 +1,4 @@
-name: Fold dock and controller APK
+name: Fold controller layout APK
 on:
   workflow_dispatch:
   push:
@@ -18,66 +18,71 @@ jobs:
           distribution: temurin
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Publish compact dock and controller lifecycle fixes
+      - name: Publish larger sticks and live position swap
         env:
           FOLD_PATCH: >-
-            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
-            4r+oVkui
+            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
         run: |
           python3 - <<'PY'
           import base64, zlib, os, hashlib, pathlib
           patch = zlib.decompress(base64.b64decode(os.environ['FOLD_PATCH']))
-          assert hashlib.sha256(patch).hexdigest() == '7fc8b5c383f9d46f4f6eb5213f0591e4faaff1cccd519e24fe054793772d6231'
-          pathlib.Path('/tmp/fold6.patch').write_bytes(patch)
+          assert hashlib.sha256(patch).hexdigest() == 'd2e88f1fa4e6b5887db02ed664fba3dcf8e7a5fafc079497a2b9148c34464a9f'
+          pathlib.Path('/tmp/fold7.patch').write_bytes(patch)
           PY
-          if git apply --check /tmp/fold6.patch; then
-            git apply /tmp/fold6.patch
+          if git apply --check /tmp/fold7.patch; then
+            git apply /tmp/fold7.patch
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add app tests tools
-            git commit -m 'Restore compact keyboard dock and rebuild controller after layout'
+            git add app tests
+            git commit -m 'Enlarge docked sticks and add persistent D-pad position swap'
             git push origin HEAD:"$GITHUB_REF_NAME"
           else
-            git apply --reverse --check /tmp/fold6.patch
+            git apply --reverse --check /tmp/fold7.patch
           fi
       - name: Check keyboard assets and input geometry
         run: |
@@ -92,7 +97,7 @@ jobs:
         run: ./gradlew :app:assembleNonRootDebug --console=plain
       - uses: actions/upload-artifact@v4
         with:
-          name: Moonlight-Fold-Keyboard-Controller-v6
+          name: Moonlight-Fold-Controller-v7
           path: app/build/outputs/apk/nonRoot/debug/*.apk
       - name: Lint
         run: ./gradlew :app:lintNonRootDebug --console=plain
